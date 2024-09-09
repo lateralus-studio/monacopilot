@@ -23,9 +23,10 @@ export const createRequestBody = (
   completionMetadata: CompletionMetadata,
   model: CompletionModel,
   provider: CompletionProvider,
+  options: any,
 ): PickChatCompletionCreateParams<CompletionProvider> => {
-  const systemPrompt = generateSystemPrompt(completionMetadata);
-  const userPrompt = generateUserPrompt(completionMetadata);
+  const systemPrompt = generateSystemPrompt(completionMetadata, options);
+  const userPrompt = generateUserPrompt(completionMetadata, options);
   const modelId = getModelId(model);
 
   const commonParams = {
