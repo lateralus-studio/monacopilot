@@ -81,9 +81,9 @@ export const generateUserPrompt = (metadata: CompletionMetadata, options: any): 
     prompt += `  - If completing the code, start from '${CURSOR_PLACEHOLDER}' and provide a logical continuation.\n`;
   }
 
-  prompt += `  - Optimize for readability and performance where possible.
+  prompt += `  - Optimize for readability and effectiveness where possible.
 
-  Remember to output only the completion content without any additional explanation.`).
+  Remember to output only the completion content without any additional explanation.
 
   Here's the snippet for completion:
 
