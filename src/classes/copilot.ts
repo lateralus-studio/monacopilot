@@ -59,6 +59,7 @@ export class Copilot {
         completionMetadata,
         this.model,
         this.provider,
+        options,
       );
 
       const endpoint = getProviderCompletionEndpoint(this.provider);
