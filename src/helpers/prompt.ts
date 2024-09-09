@@ -25,13 +25,13 @@ const getDescriptionForMode = (mode: CompletionMode): string => {
 /**
  * Generates the system prompt for the AI model.
  */
-export const generateSystemPrompt = (metadata: CompletionMetadata): string => {
+export const generateSystemPrompt = (metadata: CompletionMetadata, options: any): string => {
   const language = getProperLanguageName(metadata.language);
   const description = getDescriptionForMode(
     metadata.editorState.completionMode,
   );
   const langText = language ? ` ${language}` : '';
-  return `You are an advanced AI coding assistant with expertise in ${description} for${langText} programming. Your goal is to provide accurate, efficient, and context-aware code completions. Remember, your role is to act as an extension of the developer's thought process, providing intelligent and contextually appropriate code completions.`;
+  return options.systemPrompt;
 };
 
 /**
@@ -53,7 +53,7 @@ const formatTechnology = (
 /**
  * Generates the user prompt for the AI model.
  */
-export const generateUserPrompt = (metadata: CompletionMetadata): string => {
+export const generateUserPrompt = (metadata: CompletionMetadata, options: any): string => {
   const {
     filename,
     language,
@@ -68,15 +68,12 @@ export const generateUserPrompt = (metadata: CompletionMetadata): string => {
     ? `the file named "${filename}"`
     : 'a larger project';
 
-  let prompt = `You are tasked with ${modeDescription} for a code snippet. The code is part of ${fileNameText}.\n\n`;
-
-  prompt += formatTechnology(technologies, language);
+  let prompt = ``;
 
   prompt += `\n\nHere are the details about how the completion should be generated:
   - The cursor position is marked with '${CURSOR_PLACEHOLDER}'.
   - Your completion must start exactly at the cursor position.
-  - Do not repeat any code that appears before or after the cursor.
-  - Ensure your completion does not introduce any syntactical or logical errors.\n`;
+  - Do not repeat any content that appears before or after the cursor.\n`;
 
   if (completionMode === 'fill-in-the-middle') {
     prompt += `  - If filling in the middle, replace '${CURSOR_PLACEHOLDER}' entirely with your completion.\n`;
@@ -86,9 +83,9 @@ export const generateUserPrompt = (metadata: CompletionMetadata): string => {
 
   prompt += `  - Optimize for readability and performance where possible.
 
-  Remember to output only the completion code without any additional explanation, and do not wrap it in markdown code syntax, such as three backticks (\`\`\`).
+  Remember to output only the completion content without any additional explanation.`).
 
-  Here's the code snippet for completion:
+  Here's the snippet for completion:
 
   <code>
   ${textBeforeCursor}${CURSOR_PLACEHOLDER}${textAfterCursor}
