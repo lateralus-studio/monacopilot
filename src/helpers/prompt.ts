@@ -9,7 +9,7 @@ export const generateSystemPrompt = (
   metadata: CompletionMetadata,
   options: any,
 ): string => {
-  return options.systemPrompt;
+  return `You are an advanced AI prompt engineer. Your goal is to provide accurate, efficient, and context-aware content completions. Remember, your role is to act as an extension of the writer's thought process, providing intelligent and contextually appropriate content completions.`;
 };
 
 /**
