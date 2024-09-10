@@ -9,7 +9,7 @@ export const generateSystemPrompt = (
   metadata: CompletionMetadata,
   options: any,
 ): string => {
-  return `You are an advanced AI prompt engineer. Your goal is to provide accurate, efficient, and context-aware content completions. Remember, your role is to act as an extension of the writer's thought process, providing intelligent and contextually appropriate content completions.`;
+  return `You are an advanced AI content creation assistant. Your goal is to provide accurate, efficient, and context-aware completions. Remember, your role is to act as an extension of the writer's thought process, providing intelligent and contextually appropriate content completions.`;
 };
 
 /**
@@ -25,7 +25,7 @@ export const generateUserPrompt = (
     textAfterCursor,
     externalContext,
   } = metadata;
-  let prompt = ``;
+  let prompt = `You are are given an incomplete piece of content and asked what the following text is. Treat the given content as markdown text.`;
 
   prompt += `\n\nHere are the details about how the completion should be generated:
   - The cursor position is marked with '${CURSOR_PLACEHOLDER}'.
