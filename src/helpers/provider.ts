@@ -54,6 +54,11 @@ export const createRequestBody = (
     },
   };
 
+  console.log({
+    ...commonParams,
+    ...providerSpecificParams[provider],
+  });
+
   return {
     ...commonParams,
     ...providerSpecificParams[provider],
